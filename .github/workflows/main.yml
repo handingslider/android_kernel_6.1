@@ -1,0 +1,42 @@
+name: Kernel Build via Script with Cached Neutron Clang
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Cache Neutron Clang Toolchain
+      uses: actions/cache@v4
+      with:
+        path: ~/toolchains/neutron-clang
+        key: neutron-clang-${{ runner.os }}
+        restore-keys: |
+          neutron-clang-
+
+    - name: Cache .requirements marker (optional)
+      uses: actions/cache@v4
+      with:
+        path: .requirements
+        key: requirements-installed-${{ runner.os }}
+        restore-keys: |
+          requirements-installed-
+
+    - name: Make build.sh executable
+      run: chmod +x build.sh
+
+    - name: Run build script
+      run: |
+        ./build.sh
+
+    - name: Upload built Image
+      uses: actions/upload-artifact@v4
+      with:
+        name: kernel-image
+        path: build/Image
