@@ -1,0 +1,27 @@
+--- include/linux/android_kabi.h
++++ include/linux/android_kabi.h
+@@ -38,19 +38,11 @@
+  * Worker macros, don't use these, use the ones without a leading '_'
+  */
+ 
+-#define __ANDROID_KABI_CHECK_SIZE_ALIGN(_orig, _new)                           \
+-       union {                                                                 \
+-               _Static_assert(sizeof(struct{_new;}) <= sizeof(struct{_orig;}), \
+-                              __FILE__ ":" __stringify(__LINE__) ": "          \
+-                              __stringify(_new)                                \
+-                              " is larger than "                               \
+-                              __stringify(_orig) );                            \
+-               _Static_assert(__alignof__(struct{_new;}) <= __alignof__(struct{_orig;}),       \
+-                              __FILE__ ":" __stringify(__LINE__) ": "          \
+-                              __stringify(_orig)                               \
+-                              " is not aligned the same as "                   \
+-                              __stringify(_new) );                             \
+-       }
++#define __ANDROID_KABI_CHECK_SIZE_ALIGN(_orig, _new)                         \
++        _Static_assert(sizeof(struct { _new; }) <= sizeof(struct { _orig; }), \
++                       "ANDROID_KABI size check failed");                    \
++        _Static_assert(__alignof__(struct { _new; }) <= __alignof__(struct { _orig; }), \
++                       "ANDROID_KABI align check failed")
+ 
+ #ifdef __GENKSYMS__
+ 
