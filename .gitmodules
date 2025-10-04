@@ -1,0 +1,4 @@
+[submodule "KernelSU"]
+	branch = susfs-test
+	url = https://github.com/SukiSU-Ultra/SukiSU-Ultra.git
+	path = KernelSU
