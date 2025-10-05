@@ -26,6 +26,7 @@ jobs:
           aosp-clang: false
           aosp-clang-version: r522817
           aosp-gcc: true
+          ksu: false
           anykernel3: true
           anykernel3-url: https://github.com/handingslider/AnyKernel3.git
           other-clang-url: https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86
