@@ -25,6 +25,7 @@ jobs:
           android-version: 15
           ccache: true
           aosp-clang: true
+          aosp-gcc: true
           anykernel3: true
           anykernel3-url: https://github.com/handingslider/AnyKernel3.git
       - name: Upload Flashable Zip
