@@ -1,0 +1,14 @@
+            - name: Android Kernel Build Action
+  uses: dabao1955/kernel_build_action@v1.9.0pre
+  with:
+    kernel-url: https://github.com/handingslider/android_kernel_6.1.git
+    depth: 
+    kernel-branch: sukisu
+    config: gki_defconfig
+    arch: arm64
+    android-version: 15
+    ccache: true
+    aosp-clang: true
+    anykernel3: true
+    anykernel3-url: https://github.com/handingslider/AnyKernel3.git
+          
