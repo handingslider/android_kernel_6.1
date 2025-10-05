@@ -22,9 +22,9 @@ jobs:
           kernel-branch: sukisu
           config: gki_defconfig
           arch: arm64
-          android-version: 15
           ccache: true
           aosp-clang: true
+          aosp-clang-version: r522817
           aosp-gcc: true
           anykernel3: true
           anykernel3-url: https://github.com/handingslider/AnyKernel3.git
