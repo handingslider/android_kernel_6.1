@@ -23,11 +23,12 @@ jobs:
           config: gki_defconfig
           arch: arm64
           ccache: true
-          aosp-clang: true
+          aosp-clang: false
           aosp-clang-version: r522817
           aosp-gcc: true
           anykernel3: true
           anykernel3-url: https://github.com/handingslider/AnyKernel3.git
+          other-clang-url: https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86
       - name: Upload Flashable Zip
         uses: actions/upload-artifact@v4
         with:
