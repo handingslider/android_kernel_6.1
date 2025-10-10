@@ -40,8 +40,6 @@ jobs:
   
         ACTUAL_NAME=$(find . -maxdepth 1 -name "PigguVerse-*.zip" -print -quit | xargs basename)
         
-        echo "zip_filename=$ACTUAL_NAME" >> $GITHUB_OUTPUTT
-
     - name: Upload built Image
       uses: actions/upload-artifact@v4
       with:
