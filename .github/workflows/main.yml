@@ -37,13 +37,11 @@ jobs:
     - name: Run build script
       run: |
         ./build.sh
-  
-        ACTUAL_NAME=$(find . -maxdepth 1 -name "PigguVerse-*.zip" -print -quit | xargs basename)
-        
+          
     - name: Upload built Image
       uses: actions/upload-artifact@v4
       with:
-        name: $ACTUAL_NAME      
+        name: PigguVerse(anotherzipinside).zip
         path: PigguVerse-*.zip
 
     - name: Send Success Telegram Notification 🟢
