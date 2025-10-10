@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      with:
+          submodules: 'true'
 
     - name: Cache Neutron Clang Toolchain
       uses: actions/cache@v4
