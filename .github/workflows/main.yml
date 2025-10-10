@@ -38,16 +38,15 @@ jobs:
       run: |
         ./build.sh
   
-        FULL_PATH=$(find . -maxdepth 1 -name "PigguVerse-*.zip" -print -quit)
+        ACTUAL_NAME=$(find . -maxdepth 1 -name "PigguVerse-*.zip" -print -quit | xargs basename)
         
-        ACTUAL_NAME=$(basename "$FULL_PATH")
-        
-        echo "zip_filename=$ACTUAL_NAME" >> $GITHUB_OUTPUT
+        echo "zip_filename=$ACTUAL_NAME" >> $GITHUB_OUTPUTT
+
     - name: Upload built Image
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ steps.build_kernel.outputs.zip_filename }}
-        path: PigguVerse-*
+        name: ${{ steps.build_kernel.outputs.zip_filename }}         
+        path: PigguVerse-*.zip
 
     - name: Send Success Telegram Notification 🟢
       if: success()
