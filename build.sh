@@ -78,4 +78,5 @@ if make ${BUILD_OPTIONS} KCFLAGS+="-Wno-error -Wno-array-bounds -mllvm -polly" I
     echo "Zip: $ZIPNAME"
 else
     echo -e "\nCompilation failed!"
+    exit 1
 fi
