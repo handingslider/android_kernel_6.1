@@ -3,6 +3,7 @@ name: Kernel Build via Script with Cached Neutron Clang
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
