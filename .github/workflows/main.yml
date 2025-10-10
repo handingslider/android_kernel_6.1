@@ -38,5 +38,5 @@ jobs:
     - name: Upload built Image
       uses: actions/upload-artifact@v4
       with:
-        name: kernel-image
-        path: build/Image
+        name: Kernel.zip
+        path: PigguVerse-*
