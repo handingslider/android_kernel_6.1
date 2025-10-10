@@ -47,7 +47,7 @@ jobs:
         name: ${{ steps.build_kernel.outputs.zip_filename }}
         path: PigguVerse-*
 
-- name: Send Success Telegram Notification 🟢
+    - name: Send Success Telegram Notification 🟢
       if: success()
       env:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
