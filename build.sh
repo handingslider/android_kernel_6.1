@@ -74,14 +74,6 @@ if make ${BUILD_OPTIONS} KCFLAGS+="-Wno-error -Wno-array-bounds -mllvm -polly" I
     rm -rf AnyKernel3
     echo -e "\nCompleted in $((SECONDS / 60)) minute(s) and $((SECONDS % 60)) second(s)!"
     echo "Zip: $ZIPNAME"
-    curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
-    -F text="Completed in $((SECONDS / 60)) minute(s) and $((SECONDS % 60)) second(s)!
-Kernel Version: $KERNELVERSION-$KERNELNAME" \
-    -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }} > /dev/null
-    rm log*
 else
     echo -e "\nCompilation failed!"
-    curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
-    -F text="Build failed" \
-    -F chat_id=${{ secrets.TELEGRAM_CHAT_ID }}
 fi

@@ -35,9 +35,45 @@ jobs:
     - name: Run build script
       run: |
         ./build.sh
-
+  
+        FULL_PATH=$(find . -maxdepth 1 -name "PigguVerse-*.zip" -print -quit)
+        
+        ACTUAL_NAME=$(basename "$FULL_PATH")
+        
+        echo "zip_filename=$ACTUAL_NAME" >> $GITHUB_OUTPUT
     - name: Upload built Image
       uses: actions/upload-artifact@v4
       with:
-        name: Kernel.zip
+        name: ${{ steps.build_kernel.outputs.zip_filename }}
         path: PigguVerse-*
+- name: Send Success Telegram Notification 🟢
+      if: success()
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: |
+        WORKFLOW_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        
+        MESSAGE_TEXT="✅ *Kernel Build Successful!*
+        [View Workflow Run]($WORKFLOW_URL)"
+        
+        curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+          -F chat_id="$TELEGRAM_CHAT_ID" \
+          -F text="$MESSAGE_TEXT" \
+          -F "parse_mode=markdown"
+
+    - name: Send Failure Telegram Notification 🔴
+      if: failure()
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: |
+        WORKFLOW_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        
+        MESSAGE_TEXT="❌ *Kernel Build Failed!*
+        [View Workflow Run]($WORKFLOW_URL)"
+        
+        curl -s -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" \
+          -F chat_id="$TELEGRAM_CHAT_ID" \
+          -F text="$MESSAGE_TEXT" \
+          -F "parse_mode=markdown"
