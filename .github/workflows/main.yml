@@ -45,7 +45,7 @@ jobs:
     - name: Upload built Image
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ steps.build_kernel.outputs.zip_filename }}         
+        name: $ACTUAL_NAME      
         path: PigguVerse-*.zip
 
     - name: Send Success Telegram Notification 🟢
